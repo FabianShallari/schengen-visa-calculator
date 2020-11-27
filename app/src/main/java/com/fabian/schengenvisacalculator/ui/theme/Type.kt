@@ -1,12 +1,10 @@
 package com.fabian.schengenvisacalculator.ui.theme
 
 import androidx.compose.foundation.ScrollableColumn
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,78 +18,79 @@ import com.fabian.schengenvisacalculator.R
 
 
 /*
- * Poppins font family at Google Fonts:
+ * HK Grotesk font family at Font Squirrel:
  *
- * https://fonts.google.com/specimen/Poppins
+ * https://www.fontsquirrel.com/fonts/hk-grotesk
  */
-val fonts = fontFamily(
-    font(R.font.poppins_light, FontWeight.Light),
-    font(R.font.poppins_lightitalic, FontWeight.Light, FontStyle.Italic),
-    font(R.font.poppins_regular, FontWeight.Normal),
-    font(R.font.poppins_italic, FontWeight.Normal, FontStyle.Italic),
-    font(R.font.poppins_medium, FontWeight.Medium),
-    font(R.font.poppins_mediumitalic, FontWeight.Medium, FontStyle.Italic),
-    font(R.font.poppins_semibold, FontWeight.SemiBold),
-    font(R.font.poppins_semibolditalic, FontWeight.SemiBold, FontStyle.Italic),
-    font(R.font.poppins_bold, FontWeight.Bold),
-    font(R.font.poppins_bolditalic, FontWeight.Bold, FontStyle.Italic),
+val hk_grotesk = fontFamily(
+    font(R.font.hkgrotesk_regular, FontWeight.Normal),
+    font(R.font.hkgrotesk_italic, FontWeight.Normal, FontStyle.Italic),
+    font(R.font.hkgrotesk_medium, FontWeight.Medium),
+    font(R.font.hkgrotesk_mediumitalic, FontWeight.Medium, FontStyle.Italic),
+    font(R.font.hkgrotesk_semibold, FontWeight.SemiBold),
+    font(R.font.hkgrotesk_semibolditalic, FontWeight.SemiBold, FontStyle.Italic),
+    font(R.font.hkgrotesk_bold, FontWeight.Bold),
+    font(R.font.hkgrotesk_bolditalic, FontWeight.Bold, FontStyle.Italic),
 )
 
 val typography = typographyFromDefaults(
     h1 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.Bold
     ),
     h2 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.Bold
     ),
     h3 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.SemiBold
     ),
     h4 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.SemiBold,
         lineHeight = 40.sp
     ),
     h5 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.SemiBold
     ),
     h6 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.Medium,
         lineHeight = 28.sp
     ),
     subtitle1 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.Medium,
         lineHeight = 22.sp
     ),
     subtitle2 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.Medium
     ),
+    button = TextStyle(
+        fontFamily = hk_grotesk,
+        fontWeight = FontWeight.Bold
+    ),
     body1 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.Normal,
         lineHeight = 28.sp
     ),
     body2 = TextStyle(
-        fontFamily = fonts,
+        fontFamily = hk_grotesk,
         fontWeight = FontWeight.Normal,
         lineHeight = 16.sp
     ),
-    button = TextStyle(
-        fontFamily = fonts,
-        fontWeight = FontWeight.Bold
-    ),
     caption = TextStyle(
-        fontFamily = fonts
+        fontFamily = hk_grotesk,
+        fontWeight = FontWeight.Normal
     ),
     overline = TextStyle(
-        letterSpacing = 0.08.em
+        fontFamily = hk_grotesk,
+        letterSpacing = 0.08.em,
+        fontWeight = FontWeight.Normal
     )
 )
 
@@ -130,7 +129,7 @@ fun typographyFromDefaults(
 
 
 @Composable
-private fun Typograhy(text: String) {
+private fun Typography(text: String) {
     Surface {
         ScrollableColumn(
             verticalArrangement = Arrangement.Center,
@@ -138,9 +137,11 @@ private fun Typograhy(text: String) {
         ) {
             Text(text = text, style = MaterialTheme.typography.overline, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.caption, textAlign = TextAlign.Center)
-            Text(text = text, style = MaterialTheme.typography.button, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.body2, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.body1, textAlign = TextAlign.Center)
+            Text(text = text, style = MaterialTheme.typography.button, textAlign = TextAlign.Center)
+            Text(text = text, style = MaterialTheme.typography.subtitle2, textAlign = TextAlign.Center)
+            Text(text = text, style = MaterialTheme.typography.subtitle1, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.h6, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.h5, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.h4, textAlign = TextAlign.Center)
@@ -155,6 +156,6 @@ private fun Typograhy(text: String) {
 @Composable
 private fun TypographyPreview() {
     SchengenCalculatorTheme(darkTheme = false) {
-        Typograhy(text = "Schengen Visa Calculator")
+        Typography(text = "Schengen Visa Calculator, 123")
     }
 }
