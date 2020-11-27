@@ -15,7 +15,8 @@ buildscript {
                 build_tools_version    : '30.0.2',
                 android_plugin_version : '4.2.0-alpha16',
                 kotlin_version         : '1.4.20-RC',
-                kotlin_compiler_version: '1.4.10'
+                kotlin_compiler_version: '1.4.10',
+                core_library_desugaring: '1.1.1'
         ]
 
         deps = [
@@ -27,7 +28,7 @@ buildscript {
                 material_version             : '1.2.1',
                 junit_version                : '4.13.1',
                 test_ext_version             : '1.1.2',
-                espresso_version             : '3.3.0'
+                espresso_version             : '3.3.0',
         ]
 
     }
