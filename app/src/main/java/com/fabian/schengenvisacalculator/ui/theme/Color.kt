@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Color
 * https://commons.wikimedia.org/wiki/File:Flag_of_Europe.svg
 */
 val europeBlue = Color(0xFF003399)
-val europeBlueLight = Color(0xFF505ccb)
-val europeBlueDark = Color(0xFF00106a)
+val europeBlueLight = Color(0xFF505CCB)
+val europeBlueDark = Color(0xFF00106A)
 val europeGold = Color(0xFFFFCC00)
 /*
 val europeGoldLight = Color(0xFFFFFF50)
