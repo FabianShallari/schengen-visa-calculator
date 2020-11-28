@@ -1,30 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-  <!-- Base application theme. -->
-  <style name="Theme.SchengenVisaCalculator"
-      parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-    <!-- Primary brand color. -->
-    <item name="colorPrimary">@color/purple_500</item>
-    <item name="colorPrimaryVariant">@color/purple_700</item>
-    <item name="colorOnPrimary">@color/white</item>
-    <!-- Secondary brand color. -->
-    <item name="colorSecondary">@color/teal_200</item>
-    <item name="colorSecondaryVariant">@color/teal_700</item>
-    <item name="colorOnSecondary">@color/black</item>
-    <!-- Status bar color. -->
-    <item name="android:statusBarColor"
-        tools:targetApi="l">?attr/colorPrimaryVariant
-    </item>
-    <!-- Customize your theme here. -->
-  </style>
+    <!-- Base application theme. -->
+    <style name="Theme.SchengenVisaCalculator" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-  <style name="Theme.SchengenVisaCalculator.NoActionBar">
-    <item name="windowActionBar">false</item>
-    <item name="windowNoTitle">true</item>
-  </style>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/europe_blue</item>
+        <item name="colorPrimaryVariant">@color/europe_blue_light</item>
+        <item name="colorOnPrimary">@color/white</item>
 
-  <style name="Theme.SchengenVisaCalculator.AppBarOverlay"
-      parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/europe_gold</item>
+        <item name="colorSecondaryVariant">@color/europe_gold_light</item>
+        <item name="colorOnSecondary">@color/black</item>
 
-  <style name="Theme.SchengenVisaCalculator.PopupOverlay"
-      parent="ThemeOverlay.AppCompat.Light" />
+        <item name="backgroundColor">@color/white</item>
+
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+        <item name="android:enforceStatusBarContrast" tools:targetApi="q">true</item>
+        <item name="android:enforceNavigationBarContrast" tools:targetApi="q">true</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/backgroundColor</item>
+        <!-- Navigation bar color. -->
+        <item name="android:navigationBarColor">?attr/backgroundColor</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.SchengenVisaCalculator.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark" />
+
+    <style name="Theme.SchengenVisaCalculator.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

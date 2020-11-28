@@ -1,30 +1,22 @@
 package com.fabian.schengenvisacalculator.ui
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.staticAmbientOf
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import com.fabian.schengenvisacalculator.ui.screens.Calendar
-import java.time.LocalDate
+import androidx.annotation.StringRes
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.sharp.DateRange
+import androidx.compose.material.icons.sharp.Home
+import androidx.compose.material.icons.sharp.Info
+import androidx.compose.ui.graphics.vector.VectorAsset
+import com.fabian.schengenvisacalculator.R
 
-val NavControllerAmbient =
-    staticAmbientOf<NavHostController> { error("NavController not provided") }
+sealed class Screen(val route: String, val iconAsset: VectorAsset, @StringRes val label: Int) {
+    object DaysIndicator :
+        Screen(route = "days_indicator", iconAsset = Icons.Sharp.Home, label = R.string.home)
 
-sealed class Screens(val route: String) {
-    object Home : Screens(route = "home")
-    object Info : Screens(route = "info")
+    object Calendar :
+        Screen(route = "calendar", iconAsset = Icons.Sharp.DateRange, label = R.string.calendar)
+
+    object Info : Screen(route = "info", iconAsset = Icons.Sharp.Info, label = R.string.info)
 }
 
-@Composable
-fun NavigationHost() {
-    val navController = NavControllerAmbient.current
-    NavHost(navController = navController, startDestination = Screens.Home.route) {
-        composable(Screens.Home.route) {
-            Calendar(
-                calendarDateRange = LocalDate.of(2020, 1, 12)..LocalDate.of(2020, 12, 31),
-                selectedDateRanges = listOf()
-            )
-        }
-    }
-}
+val screens = listOf(Screen.DaysIndicator, Screen.Calendar, Screen.Info)
+val startDestination = Screen.DaysIndicator

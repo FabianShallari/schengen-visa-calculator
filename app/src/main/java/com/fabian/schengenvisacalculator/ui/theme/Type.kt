@@ -9,13 +9,15 @@ import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.*
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.font
+import androidx.compose.ui.text.font.fontFamily
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import androidx.ui.tooling.preview.Preview
 import com.fabian.schengenvisacalculator.R
-
 
 /*
  * HK Grotesk font family at Font Squirrel:
@@ -36,11 +38,11 @@ val hk_grotesk = fontFamily(
 val typography = typographyFromDefaults(
     h1 = TextStyle(
         fontFamily = hk_grotesk,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     ),
     h2 = TextStyle(
         fontFamily = hk_grotesk,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     ),
     h3 = TextStyle(
         fontFamily = hk_grotesk,
@@ -49,7 +51,7 @@ val typography = typographyFromDefaults(
     h4 = TextStyle(
         fontFamily = hk_grotesk,
         fontWeight = FontWeight.SemiBold,
-        lineHeight = 40.sp
+        lineHeight = 40.sp,
     ),
     h5 = TextStyle(
         fontFamily = hk_grotesk,
@@ -135,13 +137,29 @@ private fun Typography(text: String) {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = text, style = MaterialTheme.typography.overline, textAlign = TextAlign.Center)
-            Text(text = text, style = MaterialTheme.typography.caption, textAlign = TextAlign.Center)
+            Text(
+                text = text,
+                style = MaterialTheme.typography.overline,
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = text,
+                style = MaterialTheme.typography.caption,
+                textAlign = TextAlign.Center
+            )
             Text(text = text, style = MaterialTheme.typography.body2, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.body1, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.button, textAlign = TextAlign.Center)
-            Text(text = text, style = MaterialTheme.typography.subtitle2, textAlign = TextAlign.Center)
-            Text(text = text, style = MaterialTheme.typography.subtitle1, textAlign = TextAlign.Center)
+            Text(
+                text = text,
+                style = MaterialTheme.typography.subtitle2,
+                textAlign = TextAlign.Center
+            )
+            Text(
+                text = text,
+                style = MaterialTheme.typography.subtitle1,
+                textAlign = TextAlign.Center
+            )
             Text(text = text, style = MaterialTheme.typography.h6, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.h5, textAlign = TextAlign.Center)
             Text(text = text, style = MaterialTheme.typography.h4, textAlign = TextAlign.Center)

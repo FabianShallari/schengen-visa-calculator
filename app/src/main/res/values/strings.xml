@@ -1,4 +1,8 @@
 <resources>
-  <string name="app_name">Schengen Visa Calculator</string>
-  <string name="app_short_name">Visa</string>
+    <string name="app_name">Schengen Visa Calculator</string>
+    <string name="app_short_name">Visa</string>
+    <string name="days_left">days left</string>
+    <string name="home">Home</string>
+    <string name="calendar">Calendar</string>
+    <string name="info">Info</string>
 </resources>

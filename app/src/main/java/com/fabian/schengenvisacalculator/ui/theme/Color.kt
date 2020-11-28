@@ -2,52 +2,44 @@ package com.fabian.schengenvisacalculator.ui.theme
 
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
-import androidx.compose.ui.graphics.Color
-
-/*
-* Color swatch taken from Flag of Europe:
-* https://commons.wikimedia.org/wiki/File:Flag_of_Europe.svg
-*/
-val europeBlue = Color(0xFF003399)
-val europeBlueLight = Color(0xFF505CCB)
-val europeBlueDark = Color(0xFF00106A)
-val europeGold = Color(0xFFFFCC00)
-/*
-val europeGoldLight = Color(0xFFFFFF50)
-val europeGoldDark = Color(0xFFC79C00)
-val primaryText = Color.White
-val secondaryText = Color.Black
-*/
-
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.colorResource
+import com.fabian.schengenvisacalculator.R
 
 /*
  * Color palette can be customized here:
  * https://material.io/resources/color/
+ *
+ * Using XML colors for now for 2 reasons:
+ *
+ * 1. Don't repeat colors declarations across xml and compose
+ * 2. Android Studio doesn't support the color preview for colors declared using Compose
  */
-internal val DarkColorPalette = darkColors(
-    primary = europeBlue,
-    primaryVariant = europeBlueLight,
-    secondary = europeGold,
-    /*
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
-)
+@Composable
+val DarkColorPalette
+    get() = darkColors(
+        primary = colorResource(id = R.color.europe_blue),
+        onPrimary = colorResource(id = R.color.white),
+        primaryVariant = colorResource(id = R.color.europe_blue_dark),
+        secondary = colorResource(id = R.color.europe_gold),
+        onSecondary = colorResource(id = R.color.black),
+        background = colorResource(id = R.color.black),
+        onBackground = colorResource(id = R.color.white),
+        surface = colorResource(id = R.color.black),
+        onSurface = colorResource(id = R.color.white)
+    )
 
-internal val LightColorPalette = lightColors(
-    primary = europeBlue,
-    primaryVariant = europeBlueDark,
-    secondary = europeGold,
-    /*
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
-)
+@Composable
+val LightColorPalette
+    get() = lightColors(
+        primary = colorResource(id = R.color.europe_blue),
+        onPrimary = colorResource(id = R.color.white),
+        primaryVariant = colorResource(id = R.color.europe_blue_light),
+        secondary = colorResource(id = R.color.europe_gold),
+        onSecondary = colorResource(id = R.color.black),
+        secondaryVariant = colorResource(id = R.color.europe_gold_light),
+        background = colorResource(id = R.color.white),
+        onBackground = colorResource(id = R.color.black),
+        surface = colorResource(id = R.color.white),
+        onSurface = colorResource(id = R.color.black)
+    )

@@ -59,6 +59,8 @@ dependencies {
     implementation "androidx.ui:ui-tooling:$deps.compose_version"
     implementation "androidx.navigation:navigation-compose:$deps.nav_compose_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$deps.ktx_lifecycle_runtime_version"
+    implementation "com.jakewharton.timber:timber:$deps.timber"
+
 
     testImplementation "junit:junit:$deps.junit_version"
     androidTestImplementation "androidx.test.ext:junit:$deps.test_ext_version"

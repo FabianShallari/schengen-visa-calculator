@@ -2,29 +2,28 @@ package com.fabian.schengenvisacalculator.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumnFor
+import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Providers
-import androidx.compose.runtime.ambientOf
+import androidx.compose.runtime.emptyContent
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import androidx.ui.tooling.preview.Devices
 import androidx.ui.tooling.preview.Preview
 import com.fabian.schengenvisacalculator.ui.model.CellState
 import com.fabian.schengenvisacalculator.ui.model.WeekData
+import com.fabian.schengenvisacalculator.ui.providers.StartDayOfWeekAmbient
 import com.fabian.schengenvisacalculator.ui.theme.SchengenCalculatorTheme
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Period
 import java.time.YearMonth
 import java.time.temporal.TemporalAdjusters.*
 import kotlin.math.abs
-
-val CalendarStartDayOfWeek = ambientOf { DayOfWeek.SUNDAY }
 
 fun Collection<LocalDate>.earliest(): LocalDate {
     if (this.isEmpty()) {
@@ -36,11 +35,12 @@ fun Collection<LocalDate>.earliest(): LocalDate {
 
 @Composable
 fun Calendar(
+    modifier: Modifier = Modifier,
     calendarDateRange: ClosedRange<LocalDate>,
     selectedDateRanges: List<ClosedRange<LocalDate>>
 ) {
 
-    val startDayOfWeek = CalendarStartDayOfWeek.current
+    val startDayOfWeek = StartDayOfWeekAmbient.current
     val endDayOfWeek = startDayOfWeek.minus(1)
 
     val weeksData = mutableListOf<WeekData>()
@@ -78,42 +78,58 @@ fun Calendar(
         startDateOfWeek = endDateOfWeek.plusDays(1)
     }
 
-    Providers(CalendarStartDayOfWeek provides startDayOfWeek) {
-        Surface(
-            modifier = Modifier.fillMaxWidth().fillMaxHeight()
-        ) {
-            LazyColumnFor(
-                contentPadding = PaddingValues(8.dp),
-                modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-                items = weeksData
-            ) { weekData ->
-                if (weekData.isFirstWeekOfMonth) {
-                    MonthHeader(
-                        month = YearMonth.of(
-                            weekData.firstDateOfWeek.year,
-                            weekData.firstDateOfWeek.month
-                        )
+
+    Surface(
+        modifier = modifier.fillMaxWidth().fillMaxHeight()
+    ) {
+        LazyColumnForIndexed(
+            contentPadding = PaddingValues(
+                start = 8.dp,
+                end = 8.dp,
+                top = 12.dp,
+                bottom = 12.dp
+            ),
+            modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+            items = weeksData,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) { index, weekData ->
+            if (weekData.isFirstWeekOfMonth) {
+                MonthHeader(
+                    modifier = Modifier.padding(
+                        top = if (index == 0) 8.dp else 24.dp,
+                        bottom = 8.dp
+                    ),
+                    month = YearMonth.of(
+                        weekData.firstDateOfWeek.year,
+                        weekData.firstDateOfWeek.month
                     )
+                )
 
-                    WeekHeader()
-                }
-
-                Week(weekData = weekData)
+                WeekHeader()
             }
+
+            Week(weekData = weekData)
         }
     }
+
 }
 
 @Composable
 private fun MonthHeader(modifier: Modifier = Modifier, month: YearMonth) {
-    Row(modifier = modifier.padding(horizontal = 12.dp).padding(top = 24.dp, bottom = 8.dp)) {
+    Row(
+        modifier = modifier
+            .wrapContentHeight(Alignment.Bottom)
+            .preferredWidth((7 * 48).dp + (12 * 2).dp),
+        horizontalArrangement = Arrangement.Center
+    ) {
         Text(
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.align(Alignment.Bottom),
             text = month.month.name,
             style = MaterialTheme.typography.h6
         )
+        Spacer(modifier = Modifier.weight(1f))
         Text(
-            modifier = Modifier.align(Alignment.CenterVertically),
+            modifier = Modifier.align(Alignment.Bottom),
             text = "${month.year}",
             style = MaterialTheme.typography.caption
         )
@@ -125,7 +141,7 @@ private fun WeekHeader(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier.fillMaxWidth().wrapContentWidth(),
     ) {
-        val calendarStartDayOfWeek = CalendarStartDayOfWeek.current
+        val calendarStartDayOfWeek = StartDayOfWeekAmbient.current
 
         for (weekDay in 0 until 7L) {
             val currentDayOfWeek = calendarStartDayOfWeek.plus(weekDay)
@@ -155,7 +171,7 @@ private fun Week(
     Row(modifier = modifier.fillMaxWidth().wrapContentWidth(Alignment.CenterHorizontally)) {
         // Render empty cells for start days to skip
         for (day in 0 until weekData.startDaysToSkip) {
-            CellContainer(state = CellState.NotSelectable) {}
+            CellContainer(state = CellState.NotSelectable)
         }
 
         // Render date cells
@@ -171,7 +187,7 @@ private fun Week(
 
         // Render empty cells for end days to skip
         for (day in 0 until weekData.endDaysToSkip) {
-            CellContainer(state = CellState.NotSelectable) {}
+            CellContainer(state = CellState.NotSelectable)
         }
     }
 }
@@ -180,7 +196,7 @@ private fun Week(
 private fun CellContainer(
     modifier: Modifier = Modifier,
     state: CellState,
-    children: @Composable () -> Unit
+    children: @Composable () -> Unit = emptyContent()
 ) {
     Box(
         modifier = modifier.preferredSize(48.dp).clip(CircleShape)
@@ -189,12 +205,12 @@ private fun CellContainer(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, device = Devices.PIXEL_3)
 @Composable
 private fun CalendarPreview() {
     SchengenCalculatorTheme(darkTheme = false) {
         Calendar(
-            calendarDateRange = LocalDate.of(2020, 1, 12)..LocalDate.of(2020, 12, 21),
+            calendarDateRange = LocalDate.of(2020, 1, 12)..LocalDate.of(2020, 3, 21),
             selectedDateRanges = listOf()
         )
     }
