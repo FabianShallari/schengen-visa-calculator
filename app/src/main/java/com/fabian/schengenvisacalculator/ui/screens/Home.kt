@@ -55,8 +55,12 @@ private fun NavigationHost(modifier: Modifier = Modifier) {
     val navController = NavControllerAmbient.current
 
     NavHost(navController = navController, startDestination = startDestination.route) {
-        composable(Screen.DaysIndicator.route) {
-            DaysIndicator(modifier = modifier, daysLeft = 30)
+        composable(Screen.CompletedDays.route) {
+            CompletedDays(modifier = modifier, completedDatesList = listOf(
+                LocalDate.of(2020, 3, 1)..LocalDate.of(2020, 3, 8),
+                LocalDate.of(2020, 3, 25)..LocalDate.of(2020, 4, 30),
+                LocalDate.of(2020, 5, 31)..LocalDate.of(2020, 6, 16)
+            ))
         }
         composable(Screen.Calendar.route) {
             Calendar(

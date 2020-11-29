@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.vector.VectorAsset
 import com.fabian.schengenvisacalculator.R
 
 sealed class Screen(val route: String, val iconAsset: VectorAsset, @StringRes val label: Int) {
-    object DaysIndicator :
+    object CompletedDays :
         Screen(route = "days_indicator", iconAsset = Icons.Sharp.Home, label = R.string.home)
 
     object Calendar :
@@ -18,5 +18,5 @@ sealed class Screen(val route: String, val iconAsset: VectorAsset, @StringRes va
     object Info : Screen(route = "info", iconAsset = Icons.Sharp.Info, label = R.string.info)
 }
 
-val screens = listOf(Screen.DaysIndicator, Screen.Calendar, Screen.Info)
-val startDestination = Screen.DaysIndicator
+val screens = listOf(Screen.CompletedDays, Screen.Calendar, Screen.Info)
+val startDestination = Screen.CompletedDays

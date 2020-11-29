@@ -56,6 +56,7 @@ dependencies {
     implementation "com.google.android.material:material:$deps.material_version"
     implementation "androidx.compose.ui:ui:$deps.compose_version"
     implementation "androidx.compose.material:material:$deps.compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$deps.compose_version"
     implementation "androidx.ui:ui-tooling:$deps.compose_version"
     implementation "androidx.navigation:navigation-compose:$deps.nav_compose_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$deps.ktx_lifecycle_runtime_version"

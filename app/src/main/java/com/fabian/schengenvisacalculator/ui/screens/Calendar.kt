@@ -1,7 +1,6 @@
 package com.fabian.schengenvisacalculator.ui.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumnFor
 import androidx.compose.foundation.lazy.LazyColumnForIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
@@ -19,25 +18,19 @@ import com.fabian.schengenvisacalculator.ui.model.CellState
 import com.fabian.schengenvisacalculator.ui.model.WeekData
 import com.fabian.schengenvisacalculator.ui.providers.StartDayOfWeekAmbient
 import com.fabian.schengenvisacalculator.ui.theme.SchengenCalculatorTheme
+import com.fabian.schengenvisacalculator.util.LocalDateRange
+import com.fabian.schengenvisacalculator.util.earliest
+import com.fabian.schengenvisacalculator.util.isBeforeOrEqual
+import com.fabian.schengenvisacalculator.util.periodInDays
 import java.time.LocalDate
-import java.time.Period
 import java.time.YearMonth
 import java.time.temporal.TemporalAdjusters.*
-import kotlin.math.abs
-
-fun Collection<LocalDate>.earliest(): LocalDate {
-    if (this.isEmpty()) {
-        throw IllegalStateException("Collection of dates must not be empty")
-    }
-
-    return this.minOrNull()!!
-}
 
 @Composable
 fun Calendar(
     modifier: Modifier = Modifier,
-    calendarDateRange: ClosedRange<LocalDate>,
-    selectedDateRanges: List<ClosedRange<LocalDate>>
+    calendarDateRange: LocalDateRange,
+    selectedDateRanges: List<LocalDateRange>
 ) {
 
     val startDayOfWeek = StartDayOfWeekAmbient.current
@@ -47,9 +40,7 @@ fun Calendar(
     var startDateOfWeek = calendarDateRange.start
 
 
-    while (startDateOfWeek.isBefore(calendarDateRange.endInclusive) ||
-        startDateOfWeek.isEqual(calendarDateRange.endInclusive)
-    ) {
+    while (startDateOfWeek.isBeforeOrEqual(calendarDateRange.endInclusive)) {
         val dateAtEndOfWeek = startDateOfWeek.with(next(endDayOfWeek))
         val dateAtEndOfMonth =
             YearMonth.of(startDateOfWeek.year, startDateOfWeek.month).atEndOfMonth()
@@ -69,8 +60,8 @@ fun Calendar(
                 isFirstWeekOfMonth = startDateOfWeek.dayOfMonth == 1 || startDateOfWeek.isEqual(
                     calendarDateRange.start
                 ),
-                startDaysToSkip = abs(Period.between(dayAtStartOfWeek, startDateOfWeek).days),
-                endDaysToSkip = abs(Period.between(endDateOfWeek, dayAtEndOfWeek).days),
+                startDaysToSkip = dayAtStartOfWeek.periodInDays(startDateOfWeek),
+                endDaysToSkip = endDateOfWeek.periodInDays(dayAtEndOfWeek),
             )
         )
 
