@@ -56,17 +56,23 @@ private fun NavigationHost(modifier: Modifier = Modifier) {
 
     NavHost(navController = navController, startDestination = startDestination.route) {
         composable(Screen.CompletedDays.route) {
-            CompletedDays(modifier = modifier, completedDatesList = listOf(
-                LocalDate.of(2020, 3, 1)..LocalDate.of(2020, 3, 8),
-                LocalDate.of(2020, 3, 25)..LocalDate.of(2020, 4, 30),
-                LocalDate.of(2020, 5, 31)..LocalDate.of(2020, 6, 16)
-            ))
+            CompletedDays(
+                modifier = modifier, completedDatesList = listOf(
+                    LocalDate.of(2020, 3, 1)..LocalDate.of(2020, 3, 8),
+                    LocalDate.of(2020, 3, 16)..LocalDate.of(2020, 8, 31),
+                    LocalDate.of(2020, 4, 8)..LocalDate.of(2020, 4, 17)
+                )
+            )
         }
         composable(Screen.Calendar.route) {
             Calendar(
                 modifier = modifier,
                 calendarDateRange = LocalDate.of(2020, 1, 12)..LocalDate.of(2020, 12, 31),
-                selectedDateRanges = listOf()
+                selectedDateRanges = listOf(
+                    LocalDate.of(2020, 3, 1)..LocalDate.of(2020, 3, 8),
+                    LocalDate.of(2020, 3, 16)..LocalDate.of(2020, 3, 31),
+                    LocalDate.of(2020, 4, 8)..LocalDate.of(2020, 4, 17)
+                )
             )
         }
         composable(Screen.Info.route) {

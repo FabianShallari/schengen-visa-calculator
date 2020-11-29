@@ -6,7 +6,7 @@ import androidx.compose.runtime.ambientOf
 import com.fabian.schengenvisacalculator.data.SettingsRepository
 import java.time.DayOfWeek
 
-val StartDayOfWeekAmbient = ambientOf { DayOfWeek.SUNDAY }
+val StartDayOfWeekAmbient = ambientOf { DayOfWeek.MONDAY }
 
 @Composable
 fun StartDayOfWeekProvider(children: @Composable () -> Unit) {

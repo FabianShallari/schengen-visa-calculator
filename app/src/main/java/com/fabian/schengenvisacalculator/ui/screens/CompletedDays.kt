@@ -77,11 +77,11 @@ fun CompletedDaysLayout(modifier: Modifier, children: @Composable () -> Unit) {
 
 @Composable
 fun DaysIndicator(modifier: Modifier = Modifier, completedDatesList: List<LocalDateRange>) {
-    val daysCompleted = completedDatesList.fold(0) { accumulator, dateRange ->
+    val daysCompleted = completedDatesList.fold(0L) { accumulator, dateRange ->
         accumulator + dateRange.periodInDays(includeLastDate = true)
     }
 
-    val daysLeft = 90 - daysCompleted
+    val daysLeft = (90 - daysCompleted).coerceIn(0, 90)
 
     Box(modifier = modifier.preferredSize(INDICATOR_SIZE_DP), alignment = Alignment.Center) {
         val strokeColor = MaterialTheme.colors.primary
@@ -135,7 +135,7 @@ fun DaysIndicator(modifier: Modifier = Modifier, completedDatesList: List<LocalD
 @Composable
 fun CompletedDatesList(
     modifier: Modifier = Modifier,
-    completedDatesList: List<ClosedRange<LocalDate>>
+    completedDatesList: List<LocalDateRange>
 ) {
     LazyColumnFor(
         contentPadding = PaddingValues(
@@ -229,7 +229,7 @@ fun CompletedDaysPreviewPhone() {
     CompletedDays(
         completedDatesList = listOf(
             LocalDate.of(2020, 3, 1)..LocalDate.of(2020, 3, 8),
-            LocalDate.of(2020, 4, 5)..LocalDate.of(2020, 4, 30)
+            LocalDate.of(2020, 4, 5)..LocalDate.of(2020, 5, 30)
         )
     )
 }
@@ -244,7 +244,7 @@ fun CompletedDaysPreviewTablet() {
     CompletedDays(
         completedDatesList = listOf(
             LocalDate.of(2020, 3, 1)..LocalDate.of(2020, 3, 8),
-            LocalDate.of(2020, 4, 5)..LocalDate.of(2020, 4, 30)
+            LocalDate.of(2020, 4, 5)..LocalDate.of(2020, 5, 30)
         )
     )
 }
