@@ -33,6 +33,7 @@ fun Home(modifier: Modifier = Modifier) {
                             style = MaterialTheme.typography.caption
                         )
                     },
+                    alwaysShowLabels = false,
                     selected = currentRoute == screen.route,
                     selectedContentColor = MaterialTheme.colors.onSurface,
                     onClick = {
