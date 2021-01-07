@@ -31,11 +31,6 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    kotlinOptions {
-        jvmTarget = '1.8'
-        useIR = true
-    }
-
     buildFeatures {
         compose true
     }
@@ -43,6 +38,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion deps.compose_version
         kotlinCompilerVersion tools.kotlin_compiler_version
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xallow-jvm-ir-dependencies"]
     }
 }
 
@@ -61,7 +63,6 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:$deps.nav_compose_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$deps.ktx_lifecycle_runtime_version"
     implementation "com.jakewharton.timber:timber:$deps.timber"
-
 
     testImplementation "junit:junit:$deps.junit_version"
     androidTestImplementation "androidx.test.ext:junit:$deps.test_ext_version"
