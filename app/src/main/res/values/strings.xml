@@ -5,5 +5,15 @@
     <string name="home">Home</string>
     <string name="calendar">Calendar</string>
     <string name="info">Info</string>
-    <string name="days">%d days</string>
+    <string name="completed">Completed</string>
+
+    <plurals name="days">
+        <item quantity="one">%d day</item>
+        <item quantity="other">%d days</item>
+    </plurals>
+
+    <plurals name="days_left">
+        <item quantity="one">day left</item>
+        <item quantity="other">days left</item>
+    </plurals>
 </resources>

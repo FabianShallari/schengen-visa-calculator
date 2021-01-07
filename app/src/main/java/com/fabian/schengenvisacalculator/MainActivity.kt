@@ -8,7 +8,6 @@ import com.fabian.schengenvisacalculator.ui.App
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             App()
         }

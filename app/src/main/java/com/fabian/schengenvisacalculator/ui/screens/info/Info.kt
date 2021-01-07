@@ -1,4 +1,4 @@
-package com.fabian.schengenvisacalculator.ui.screens
+package com.fabian.schengenvisacalculator.ui.screens.info
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,13 +9,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun Info(modifier: Modifier) {
+fun Info(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Not Implemented")
         Text(text = "Not Implemented")
     }
 }

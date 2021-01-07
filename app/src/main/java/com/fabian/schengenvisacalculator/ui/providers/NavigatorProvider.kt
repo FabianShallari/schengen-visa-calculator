@@ -6,13 +6,14 @@ import androidx.compose.runtime.staticAmbientOf
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 
-val NavControllerAmbient =
-    staticAmbientOf<NavHostController> { error("NavController not provided") }
+val AmbientNavigator =
+    staticAmbientOf<NavHostController> { error("Navigator not provided") }
 
 @Composable
-fun NavControllerProvider(children: @Composable () -> Unit) {
-    val navController = rememberNavController()
-    Providers(NavControllerAmbient provides navController) {
-        children()
+fun NavigatorProvider(content: @Composable () -> Unit) {
+    val navHostController = rememberNavController()
+
+    Providers(AmbientNavigator provides navHostController) {
+        content()
     }
 }

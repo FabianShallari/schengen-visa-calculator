@@ -15,9 +15,10 @@ import com.fabian.schengenvisacalculator.R
  * 1. Don't repeat colors declarations across xml and compose
  * 2. Android Studio doesn't support the color preview for colors declared using Compose
  */
+// TODO: 7.1.21 Remove the @Composable annotation on the property when Android Studio doesn't mark it as error
 @Composable
 val DarkColorPalette
-    get() = darkColors(
+    @Composable get() = darkColors(
         primary = colorResource(id = R.color.europe_blue),
         onPrimary = colorResource(id = R.color.white),
         primaryVariant = colorResource(id = R.color.europe_blue_dark),
@@ -29,9 +30,10 @@ val DarkColorPalette
         onSurface = colorResource(id = R.color.white)
     )
 
+// TODO: 7.1.21 Remove the @Composable annotation on the property when Android Studio doesn't mark it as error
 @Composable
 val LightColorPalette
-    get() = lightColors(
+    @Composable get() = lightColors(
         primary = colorResource(id = R.color.europe_blue),
         onPrimary = colorResource(id = R.color.white),
         primaryVariant = colorResource(id = R.color.europe_blue_light),
